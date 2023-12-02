@@ -35,8 +35,8 @@ fn part2(_lines: &Vec<&str>) -> u32 {
 }
 
 fn main() {
-    let file_path = "input.txt";
-    let content = read_to_string(file_path).expect(&format!("Unable to read {}", file_path));
+    const FILE_PATH: &'static str = "input.txt";
+    let content = read_to_string(FILE_PATH).expect(&format!("Unable to read {}", FILE_PATH));
     let lines: Vec<&str> = content.lines().collect();
     println!("part 1 = {:?}", part1(&lines));
     // println!("part 2 = {:?}", part2(&lines));
