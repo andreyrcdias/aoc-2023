@@ -15,7 +15,7 @@ jobs:
         with:
           components: rustfmt
       - name: Enforce formatting
-        run: cargo fmt --check
+        run: cargo fmt --check --all
 #   test:
 #     name: Test
 #     runs-on: ubuntu-latest
