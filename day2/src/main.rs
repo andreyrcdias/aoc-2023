@@ -40,7 +40,7 @@ fn part2(input: &str) -> u32 {
 
             for game in game_sets.split("; ") {
                 for pair in game.split(", ") {
-                    let (num, color) = pair.split_once(" ").unwrap();
+                    let (num, color) = pair.split_once(' ').unwrap();
                     let num: u32 = num.parse().unwrap();
                     match color {
                         "red" => rgb[0] = rgb[0].max(num),
@@ -56,8 +56,8 @@ fn part2(input: &str) -> u32 {
 }
 
 fn main() {
-    const FILE_PATH: &'static str = "input.txt";
-    let input = read_to_string(FILE_PATH).expect(&format!("Unable to read {}", FILE_PATH));
+    const FILE_PATH: &str = "input.txt";
+    let input = read_to_string(FILE_PATH).unwrap_or_else(|_| panic!("Unable to read {}", FILE_PATH));
     println!("part 1 = {:?}", part1(&input));
     println!("part 2 = {:?}", part2(&input));
 }
