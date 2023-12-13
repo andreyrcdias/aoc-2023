@@ -1,0 +1,17 @@
+a2cbbf9 fix: rust fmt
+583a309 fix: linting from cargo clippy
+b5aa9af feat: day 2 part 2 ✓
+439cde4 chore: cargo conf cleanup
+df9e629 feat: added root project to allow formatting all pkgs
+72f4ec9 feat: general ci
+cdbd87a feat: day 2 part 1 ✓
+5d98e94 feat: day 1 part 2 ✓
+b904e33 removing .pre-commit
+03d8edf fix: remove .pre-commit
+86e3c31 chore: initial .pre-commit-config
+4a9a758 chore: initial .pre-commit-config
+f543b6c fix: day1 minor code improvements
+eab5fe4 feat: day 1 part 1 ✓
+811204a added .gitignore file
+05f8c24 added .gitignore file
+c4a274c Initial commit
