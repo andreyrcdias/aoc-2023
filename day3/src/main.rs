@@ -1,6 +1,6 @@
-use std::fs::read_to_string;
-use std::collections::HashSet;
 use regex::Regex;
+use std::collections::HashSet;
+use std::fs::read_to_string;
 
 fn part1(input: &str) -> u32 {
     let lines: Vec<&str> = input.lines().collect();
