@@ -6,6 +6,7 @@ fn part1(input: &str) -> u32 {
     let lines: Vec<&str> = input.lines().collect();
 
     let symbol_regex = Regex::new(r"[^.\d]").unwrap();
+
     let mut symbol_adjacent: HashSet<(usize, usize)> = HashSet::new();
     for (i, line) in lines.iter().enumerate() {
         for m in symbol_regex.find_iter(line) {
@@ -18,17 +19,17 @@ fn part1(input: &str) -> u32 {
         }
     }
 
+    let mut sum = 0;
     let number_regex = Regex::new(r"\d+").unwrap();
-    let mut part_num_sum = 0;
     for (i, line) in lines.iter().enumerate() {
         for m in number_regex.find_iter(line) {
             let (start, end) = (m.start(), m.end());
             if (start..end).any(|j| symbol_adjacent.contains(&(i, j))) {
-                part_num_sum += m.as_str().parse::<u32>().unwrap();
+                sum += m.as_str().parse::<u32>().unwrap();
             }
         }
     }
-    part_num_sum
+    sum
 }
 
 fn main() {
