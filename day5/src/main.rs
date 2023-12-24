@@ -1,6 +1,5 @@
 use std::fs;
 
-
 fn part1(input: &str) {
     todo!()
 }

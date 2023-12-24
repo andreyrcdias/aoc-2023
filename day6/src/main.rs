@@ -29,7 +29,7 @@ fn part1(input: &str) -> i64 {
     let lines: Vec<&str> = input.lines().filter(|&s| !s.trim().is_empty()).collect();
 
     let times = lines[0]
-        .split_once(":")
+        .split_once(':')
         .unwrap()
         .1
         .split_whitespace()
@@ -37,7 +37,7 @@ fn part1(input: &str) -> i64 {
         .collect::<Vec<i64>>();
 
     let records = lines[1]
-        .split_once(":")
+        .split_once(':')
         .unwrap()
         .1
         .split_whitespace()
@@ -55,7 +55,7 @@ fn part2(input: &str) -> i64 {
     let lines: Vec<&str> = input.lines().filter(|&s| !s.trim().is_empty()).collect();
 
     let time = lines[0]
-        .split_once(":")
+        .split_once(':')
         .unwrap()
         .1
         .chars()
@@ -65,7 +65,7 @@ fn part2(input: &str) -> i64 {
         .unwrap();
 
     let record = lines[1]
-        .split_once(":")
+        .split_once(':')
         .unwrap()
         .1
         .chars()
