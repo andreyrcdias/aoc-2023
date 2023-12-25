@@ -87,5 +87,4 @@ mod tests {
         let input = fs::read_to_string(FILE_PATH).expect("Unable to open file");
         assert_eq!(part2(&input), 281);
     }
-
 }
