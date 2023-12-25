@@ -1,6 +1,7 @@
 use std::collections::HashSet;
 use std::fs;
 
+#[derive(Debug)]
 struct PartNumber {
     value: i64,
     points: HashSet<(i64, i64)>,
@@ -42,6 +43,7 @@ impl PartNumber {
     }
 }
 
+#[derive(Debug)]
 struct Data {
     numbers: Vec<PartNumber>,
     symbols: HashSet<(i64, i64)>,
@@ -98,6 +100,7 @@ fn parse_input(input: &str) -> Data {
 
 fn part1(input: &str) -> i64 {
     let data = parse_input(input);
+    println!("data: {:?}", data);
     let total = data
         .numbers
         .iter()
@@ -128,8 +131,44 @@ fn part2(input: &str) -> i64 {
 }
 
 fn main() {
-    const FILE_PATH: &str = "input.txt";
+    const FILE_PATH: &str = "sample.txt";
     let input = fs::read_to_string(FILE_PATH).expect("Unable to open file");
     println!("part 1 = {:?}", part1(&input));
     println!("part 2 = {:?}", part2(&input));
+}
+
+// TODO: missing struct tests
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_parse_input() {
+        const FILE_PATH: &str = "sample.txt";
+        let input = fs::read_to_string(FILE_PATH).expect("Unable to open file");
+        let parsed_input = parse_input(&input);
+        let number_values: Vec<i64> = parsed_input
+            .numbers
+            .iter()
+            .map(|part_num| part_num.value)
+            .collect::<Vec<i64>>();
+        assert_eq!(
+            number_values,
+            vec![467, 114, 35, 633, 617, 58, 592, 755, 664, 598]
+        );
+    }
+
+    // #[test]
+    fn test_part1() {
+        const FILE_PATH: &str = "sample.txt";
+        let input = fs::read_to_string(FILE_PATH).expect("Unable to open file");
+        assert_eq!(part1(&input), 4361);
+    }
+
+    // #[test]
+    fn test_part2() {
+        const FILE_PATH: &str = "sample.txt";
+        let input = fs::read_to_string(FILE_PATH).expect("Unable to open file");
+        assert_eq!(part2(&input), 467835);
+    }
 }

@@ -61,3 +61,22 @@ fn main() {
     println!("part 1 = {:?}", part1(&input));
     println!("part 2 = {:?}", part2(&input));
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_part1() {
+        const FILE_PATH: &str = "sample.txt";
+        let input = fs::read_to_string(FILE_PATH).expect("Unable to open file");
+        assert_eq!(part1(&input), 8);
+    }
+
+    #[test]
+    fn test_part2() {
+        const FILE_PATH: &str = "sample.txt";
+        let input = fs::read_to_string(FILE_PATH).expect("Unable to open file");
+        assert_eq!(part2(&input), 2286);
+    }
+}
