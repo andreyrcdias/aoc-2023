@@ -1,4 +1,4 @@
-//use regex::Regex;
+use regex::Regex;
 use std::fs;
 
 use aho_corasick::AhoCorasick;
@@ -13,31 +13,35 @@ fn part1(input: &str) -> u32 {
             first * 10 + last
         })
         .sum()
-
-    // approach using regex
-    // let digit_pattern = Regex::new(r"\d").unwrap();
-    // lines
-    //     .iter()
-    //     .map(|line| {
-    //         let first = digit_pattern
-    //             .find(line)
-    //             .unwrap()
-    //             .as_str()
-    //             .parse::<u32>()
-    //             .unwrap();
-    //         let last = digit_pattern
-    //             .find(&line.chars().rev().collect::<String>())
-    //             .unwrap()
-    //             .as_str()
-    //             .parse::<u32>()
-    //             .unwrap();
-    //         first * 10 + last
-    //     })
-    //     .sum()
 }
 
-fn part2(input: &str) -> u32 {
-    input
+fn part1_regex(input: &str) -> i32 {
+    // approach using regex
+    let lines: Vec<&str> = input.lines().collect();
+
+    let digit_pattern = Regex::new(r"\d").unwrap();
+    lines
+        .iter()
+        .map(|line| {
+            let first = digit_pattern
+                .find(line)
+                .unwrap()
+                .as_str()
+                .parse::<i32>()
+                .unwrap();
+            let last = digit_pattern
+                .find(&line.chars().rev().collect::<String>())
+                .unwrap()
+                .as_str()
+                .parse::<i32>()
+                .unwrap();
+            first * 10 + last
+        })
+        .sum()
+}
+
+fn part2(input: &str) -> i32 {
+    let total: u32 = input
         .lines()
         .map(|line| {
             line.to_string()
@@ -61,25 +65,21 @@ fn part2(input: &str) -> u32 {
             let last = vec.last().unwrap();
             10 * first + last
         })
-        .sum()
+        .sum();
+
+    total.try_into().unwrap()
 }
 
 fn part2_aho_corasick(input: &str) -> i32 {
     let nums = [
-        "one", "1",
-        "two", "2",
-        "three", "3",
-        "four", "4",
-        "five", "5",
-        "six", "6",
-        "seven", "7",
-        "eight", "8",
-        "nine", "9",
+        "one", "1", "two", "2", "three", "3", "four", "4", "five", "5", "six", "6", "seven", "7",
+        "eight", "8", "nine", "9",
     ];
 
     let ac = AhoCorasick::new(nums).unwrap();
 
-    let total = input.lines()
+    let total = input
+        .lines()
         .map(|line| {
             let matches = ac.find_overlapping_iter(line).collect::<Vec<_>>();
             let first = matches.first().unwrap().pattern().as_i32() / 2 + 1;
@@ -91,11 +91,12 @@ fn part2_aho_corasick(input: &str) -> i32 {
     total
 }
 
-
 fn main() {
     const FILE_PATH: &str = "input.txt";
     let input = fs::read_to_string(FILE_PATH).expect("Unable to open file");
     println!("part 1 = {:?}", part1(&input));
+    println!("part 1 regex = {:?}", part1_regex(&input));
+
     println!("part 2 = {:?}", part2(&input));
     println!("part 2 AHO Corasick = {:?}", part2_aho_corasick(&input));
 }
@@ -109,6 +110,13 @@ mod tests {
         const FILE_PATH: &str = "sample.txt";
         let input = fs::read_to_string(FILE_PATH).expect("Unable to open file");
         assert_eq!(part1(&input), 142);
+    }
+
+    #[test]
+    fn test_part1_regex() {
+        const FILE_PATH: &str = "sample.txt";
+        let input = fs::read_to_string(FILE_PATH).expect("Unable to open file");
+        assert_eq!(part1_regex(&input), 142);
     }
 
     #[test]
